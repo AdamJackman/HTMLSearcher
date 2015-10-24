@@ -48,9 +48,7 @@ public class SearchReader {
 	 */
 	public int searchResponse(BufferedReader in) throws Exception {
 
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-		
+		String inputLine;		
 		//Use the Rabin Karp Searcher to find a match
 		RabinKarpSearcher searcher = new RabinKarpSearcher();
 		String pat = pattern_.toLowerCase();
@@ -69,7 +67,6 @@ public class SearchReader {
 	        	found = true;
 	        	break;
 	        }
-			response.append(inputLine);
 		}
 		in.close();
 		return (found)? offset : -1;

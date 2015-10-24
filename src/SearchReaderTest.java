@@ -1,4 +1,6 @@
-import static org.junit.Assert.*;
+
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.BufferedReader;
 
@@ -15,7 +17,7 @@ public class SearchReaderTest {
 			BufferedReader response = http.sendGet();
 			int result = http.searchResponse(response);
 			System.out.println("Result - " + result);
-			assert(result != -1);			
+			assertTrue(result != -1);			
 		}
 		catch (Exception e){
 			fail("Error: " + e);
@@ -30,7 +32,7 @@ public class SearchReaderTest {
 			BufferedReader response = http.sendGet();
 			int result = http.searchResponse(response);
 			System.out.println("Result - " + result);
-			assert(result != -1);			
+			assertTrue(result != -1);			
 		}
 		catch (Exception e){
 			fail("Error: " + e);
@@ -45,7 +47,7 @@ public class SearchReaderTest {
 			BufferedReader response = http.sendGet();
 			int result = http.searchResponse(response);
 			System.out.println("Result - " + result);
-			assert(result == -1);			
+			assertTrue(result == -1);			
 		}
 		catch (Exception e){
 			fail("Error: " + e);

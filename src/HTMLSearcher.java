@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 
-public class SearchPage {
+public class HTMLSearcher {
 
 	private String url_;
 	private String pattern_;
@@ -13,11 +13,11 @@ public class SearchPage {
 	private static final int MULTI_VERSION = 2;	
 	
 	/**
-	 * constructor for the single version 
+	 * constructor for the single String version 
 	 * @param url
 	 * @param pattern
 	 */
-	public SearchPage(String url, String pattern){
+	public HTMLSearcher(String url, String pattern){
 		//Single search
 		url_ = url;
 		version_ = SINGLE_VERSION;
@@ -25,11 +25,11 @@ public class SearchPage {
 	}
 	
 	/**
-	 * Constructor for the multi version
+	 * Constructor for the multi String version
 	 * @param url
 	 * @param patterns
 	 */
-	public SearchPage(String url, ArrayList<String> patterns){
+	public HTMLSearcher(String url, ArrayList<String> patterns){
 		//Multi search
 		url_ = url;
 		version_ = MULTI_VERSION;
@@ -37,7 +37,8 @@ public class SearchPage {
 	}
 	
 	/**
-	 * Runs the search on the page using the version initialized with
+	 * Runs the search on the page using the version initialized
+	 * @return - Returns and array List of Strings searched for that are also on the page 
 	 */
 	public ArrayList<String> search(){
 
@@ -50,9 +51,9 @@ public class SearchPage {
 		ArrayList<String> results = new ArrayList<String>();
 		if(version_ == SINGLE_VERSION){			
 			try{
-				SearchReader http = new SearchReader(url_, pattern_);
-				BufferedReader response = http.sendGet();
-				int result = http.searchResponse(response);
+				SearchReader searcher = new SearchReader(url_, pattern_);
+				BufferedReader response = searcher.sendGet();
+				int result = searcher.searchResponse(response);
 				if(result != -1) results.add(pattern_);
 				return results;
 			} catch (Exception e){
@@ -61,9 +62,9 @@ public class SearchPage {
 		}
 		else if(version_ == MULTI_VERSION){
 			try{
-				SearchMapReader http = new SearchMapReader(url_, patterns_);
-				BufferedReader response = http.sendGet();
-				results = http.searchMapResponse(response);
+				SearchMapReader searcher = new SearchMapReader(url_, patterns_);
+				BufferedReader response = searcher.sendGet();
+				results = searcher.searchMapResponse(response);
 				return results;
 			} catch (Exception e){
 				System.out.println("Unexpected error: " + e);

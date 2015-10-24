@@ -15,7 +15,6 @@ public class SearchMapReader extends SearchReader{
 		patterns_ = patterns;
 	}
 
-	//TODO: remove the buffer?
 	/**
 	 * Will take the Content line by line and search for the pattern
 	 * @param in
@@ -24,9 +23,7 @@ public class SearchMapReader extends SearchReader{
 	 */
 	public ArrayList<String> searchMapResponse(BufferedReader in) throws Exception {
 
-		String inputLine;
-		StringBuffer response = new StringBuffer();
-		
+		String inputLine;		
 		RabinKarpMapSearcher searcher = new RabinKarpMapSearcher();
 		//Force into lower case
 		for(int i=0; i<patterns_.size(); i++){
@@ -50,7 +47,6 @@ public class SearchMapReader extends SearchReader{
 		        	break;
 	        	}
 	        }
-			response.append(inputLine);
 		}
 		in.close();
 		return matches;
