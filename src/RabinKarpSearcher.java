@@ -3,14 +3,14 @@ import java.util.Random;
 
 public class RabinKarpSearcher {
 	
-    private String pattern_;
+	protected String pattern_;
     
-    private int patternLength_;
-    private int radix_;
+    protected int patternLength_;
+    protected int radix_;
     
-    private long randomPrime_;
-    private long patternHashValue_;
-    private long RM; // R^(M-1) % Q
+    protected long randomPrime_;
+    protected long patternHashValue_;
+    protected long RM; // R^(M-1) % Q
 
     /**
      * Set up the RabinKarp's base variables 
@@ -49,7 +49,7 @@ public class RabinKarpSearcher {
      * @param size
      * @return
      */
-    private long hash(String key, int size) { 
+    protected long hash(String key, int size) { 
         long h = 0; 
         for (int i = 0; i < size; i++) 
             h = (radix_ * h + key.charAt(i)) % randomPrime_; 
@@ -63,7 +63,7 @@ public class RabinKarpSearcher {
      * @param i
      * @return
      */
-    private boolean check(String txt, int i) {
+    protected boolean check(String txt, int i) {
         for (int j = 0; j < patternLength_; j++) 
             if (pattern_.charAt(j) != txt.charAt(i + j)){
             	return false;

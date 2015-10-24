@@ -6,8 +6,8 @@ import java.net.URL;
 public class SearchReader {
 	
 	private static final String USER_AGENT = "Chrome/46.0.2490.71";
-	private String url_;
-	private String pattern_;
+	protected String url_;
+	protected String pattern_;
 	
 	public SearchReader(){
 		url_ = "https://github.com/AdamJackman";
