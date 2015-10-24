@@ -3,38 +3,6 @@ import java.util.Random;
 
 public class RabinKarpSearcher {
 	
-    /** 
-     * Takes a pattern string and an input string as command-line arguments;
-     * searches for the pattern string in the text string; and prints
-     * the first occurrence of the pattern string in the text string.
-     */
-    /**
-    public static void main(String[] args) {
-        String pat = "rab";
-        String txt = "abacadabrabracabracadabrabrabracad";
-
-        RabinKarp searcher = new RabinKarp();
-        searcher.precompute(pat);
-        int offset = searcher.search(txt);
-        System.out.println("found:    " + offset);
-        System.out.println("length:    " + txt.length());
-        if (offset < txt.length()){
-        	System.out.println("Match found");
-        } else {
-        	System.out.println("No Match found");
-        }
-        
-        // print results
-        System.out.println("text:    " + txt);
-
-        // from brute force search method 1
-        System.out.print("pattern: ");
-        for (int i = 0; i < offset; i++)
-        	System.out.print(" ");
-        System.out.println(pat);
-    }
-    **/
-	
     private String pattern_;
     
     private int patternLength_;

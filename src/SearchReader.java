@@ -3,77 +3,75 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-
 public class SearchReader {
-
-	private final String USER_AGENT = "Chrome/46.0.2490.71";
-
-	public static void main(String[] args) throws Exception {
-
-		SearchReader http = new SearchReader();
-
-		System.out.println("Testing 1 - Send Http GET request");
-		String response = http.sendGet();
+	
+	private static final String USER_AGENT = "Chrome/46.0.2490.71";
+	private String url_;
+	private String pattern_;
+	
+	public SearchReader(){
+		url_ = "https://github.com/AdamJackman";
 	}
 	
-	// HTTP GET request
-	private String sendGet() throws Exception {
-
-		String url = "https://github.com/AdamJackman";
-		
-		URL obj = new URL(url);
+	public SearchReader(String url, String pattern){
+		url_ = url;
+		pattern_ = pattern;
+	}
+	
+	/**
+	 * Goes to the URL and will grab the Content
+	 * @return BufferedReader - Contains page content
+	 * @throws Exception
+	 */
+	public BufferedReader sendGet() throws Exception {		
+		//Change the url String into a URL
+		URL obj = new URL(url_);
+		//Create a Connection
 		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-
-		// optional default is GET
 		con.setRequestMethod("GET");
-
-		//add request header
 		con.setRequestProperty("User-Agent", USER_AGENT);
-
 		int responseCode = con.getResponseCode();
-		System.out.println("\nSending 'GET' request to URL : " + url);
-		System.out.println("Response Code : " + responseCode);
 
-		BufferedReader in = new BufferedReader(
-		        new InputStreamReader(con.getInputStream()));
+		System.out.println("\nSending 'GET' request to URL : " + url_);
+		System.out.println("Response Code : " + responseCode);
+ 
+		BufferedReader response = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));		
+		return response;		
+	}
+				
+	/**
+	 * Will take the Content line by line and search for the pattern
+	 * @param in
+	 * @return Will return the position of the first occurrence, otherwise -1 for not found
+	 * @throws Exception
+	 */
+	public int searchResponse(BufferedReader in) throws Exception {
+
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 		
+		//Use the Rabin Karp Searcher to find a match
 		RabinKarpSearcher searcher = new RabinKarpSearcher();
-		String pat = "git".toLowerCase();
+		String pat = pattern_.toLowerCase();
+		searcher.precompute(pat);
+		
 		String txt = "";
+		boolean found = false;
+		int offset = 0;
 		
 		while ((inputLine = in.readLine()) != null) {
-			System.out.println(inputLine);
-			//RabinKarp the Line
+			//RabinKarp each line
 			txt = inputLine.toLowerCase();
-			
-	        searcher.precompute(pat);
-	        int offset = searcher.search(txt);
-	        System.out.println("found:    " + offset);
-	        System.out.println("length:    " + txt.length());
+	        offset = searcher.search(txt);
 	        if (offset < txt.length()){
 	        	System.out.println("Match found");
-	        	System.out.println("Match found");
-	        	System.out.println("Match found");
-	        	System.out.println("Match found");
-	        	System.out.println("Match found");
-	        	System.out.println("Match found");
-	        	System.out.println("Match found");
+	        	found = true;
 	        	break;
-	        } else {
-	        	System.out.println("No Match found");
 	        }
-			
 			response.append(inputLine);
 		}
 		in.close();
-
-		//print result
-		return response.toString();
-
-	}
-		
-			
-	
+		return (found)? offset : -1;
+	}			
 }
