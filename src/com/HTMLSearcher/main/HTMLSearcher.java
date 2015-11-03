@@ -1,3 +1,4 @@
+package com.HTMLSearcher.main;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class HTMLSearcher {
 	private String url_;
 	private String pattern_;
 	private ArrayList<String> patterns_;
-	private int version_;
+	private int version_ = 0;
 	
 	private static final int SINGLE_VERSION = 1;
 	private static final int MULTI_VERSION = 2;	
@@ -50,32 +51,24 @@ public class HTMLSearcher {
 		if(version_ == 0){
 			System.out.println("Search Page is not initialized");
 			return null;
-		}
-		
-		ArrayList<String> results = new ArrayList<String>();
-		if(version_ == SINGLE_VERSION){			
-			try{
+		}		
+		try{
+			ArrayList<String> results = new ArrayList<String>();
+			if(version_ == SINGLE_VERSION){
 				SearchReader searcher = new SearchReader(url_, pattern_);
 				BufferedReader response = searcher.sendGet();
 				int result = searcher.searchResponse(response);
 				if(result != -1) results.add(pattern_);
-				return results;
-			} catch (Exception e){
-				System.out.println("Unexpected error: " + e);
-			}
-		}
-		else if(version_ == MULTI_VERSION){
-			try{
+			} else if (version_ == MULTI_VERSION){
 				SearchMapReader searcher = new SearchMapReader(url_, patterns_);
 				BufferedReader response = searcher.sendGet();
-				results = searcher.searchMapResponse(response);
-				return results;
-			} catch (Exception e){
-				System.out.println("Unexpected error: " + e);
+				results = searcher.searchMapResponse(response);						
 			}
-		}
-		//only reached through exceptions
-		return null;
+			return results;
+		} catch (Exception e){
+			System.out.println("Unexpected error: " + e);
+			return null;
+		}		
 	}
 
 }

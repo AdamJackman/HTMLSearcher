@@ -8,7 +8,7 @@ import java.io.BufferedReader;
 
 import org.junit.Test;
 
-import com.HTMLSearcher.src.readers.SearchReader;;
+import com.HTMLSearcher.src.readers.SearchReader;
 
 public class SearchReaderTest {
 
