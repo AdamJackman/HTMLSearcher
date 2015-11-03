@@ -1,3 +1,4 @@
+package com.HTMLSearcher.src.searchers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;

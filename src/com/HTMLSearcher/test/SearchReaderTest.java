@@ -1,3 +1,5 @@
+package com.HTMLSearcher.test;
+
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -6,6 +8,7 @@ import java.io.BufferedReader;
 
 import org.junit.Test;
 
+import com.HTMLSearcher.src.readers.SearchReader;;
 
 public class SearchReaderTest {
 

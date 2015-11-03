@@ -1,3 +1,5 @@
+package com.HTMLSearcher.test;
+
 
 import static org.junit.Assert.fail;
 
@@ -5,6 +7,9 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 import org.junit.Test;
+
+import com.HTMLSearcher.src.readers.SearchMapReader;
+
 import static org.junit.Assert.*;
 
 

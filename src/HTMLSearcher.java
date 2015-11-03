@@ -1,5 +1,9 @@
+
 import java.io.BufferedReader;
 import java.util.ArrayList;
+
+import com.HTMLSearcher.src.readers.SearchMapReader;
+import com.HTMLSearcher.src.readers.SearchReader;
 
 
 public class HTMLSearcher {

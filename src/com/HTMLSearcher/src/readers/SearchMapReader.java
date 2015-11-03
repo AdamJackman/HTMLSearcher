@@ -1,5 +1,8 @@
+package com.HTMLSearcher.src.readers;
 import java.io.BufferedReader;
 import java.util.ArrayList;
+
+import com.HTMLSearcher.src.searchers.RabinKarpMapSearcher;
 
 
 public class SearchMapReader extends SearchReader{		
